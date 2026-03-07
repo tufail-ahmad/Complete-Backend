@@ -1,4 +1,4 @@
-// This file is for creating server. This is a industry standard pattern
+// This file is for creating server. This is the industry level way.
 const express = require("express");
 
 const app = express();
@@ -17,7 +17,7 @@ app.post("/notes", (req, res) => {
 // Get Api /notes
 app.get("/notes", (req, res) => {
   res.status(200).json({
-    message: "Note fetch successfully",
+    message: "Notes fetch successfully",
     notes,
   });
 });
@@ -27,15 +27,16 @@ app.delete("/notes/:index", (req, res) => {
   const index = req.params.index;
   delete notes[index];
   res.status(200).json({
-    message: "Note deleted successfully",
+    message: "Note delete successfully",
   });
 });
 
 // Patch Api /notes/:index
 app.patch("/notes/:index", (req, res) => {
   const index = req.params.index;
-  const newDescription = req.body.description;
-  notes[index].description = newDescription;
+  const { title, description } = req.body;
+  notes[index].title = title;
+  notes[index].description = description;
   res.status(200).json({
     message: "Note updated successfully",
   });
