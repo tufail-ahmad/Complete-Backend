@@ -1,5 +1,7 @@
-// This file is for starting server. It's a industry pattern
 const app = require("./src/app");
+const connectDb = require("./src/db/db");
+
+connectDb();
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");

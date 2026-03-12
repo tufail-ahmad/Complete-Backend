@@ -1,4 +1,3 @@
-// This file is for creating server. This is the industry level way.
 const express = require("express");
 
 const app = express();
@@ -10,7 +9,7 @@ const notes = [];
 app.post("/notes", (req, res) => {
   notes.push(req.body);
   res.status(201).json({
-    message: "Notes create successfully",
+    message: "Note create successfully",
   });
 });
 
@@ -38,7 +37,7 @@ app.patch("/notes/:index", (req, res) => {
   notes[index].title = title;
   notes[index].description = description;
   res.status(200).json({
-    message: "Note updated successfully",
+    message: "Note update successfully",
   });
 });
 
