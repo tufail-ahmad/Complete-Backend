@@ -4,40 +4,38 @@ const noteModel = require("./models/note.model");
 const app = express();
 app.use(express.json());
 
-//Post Api /notes
 app.post("/notes", async (req, res) => {
-  const { title, description } = req.body;
+  const body = req.body;
   await noteModel.create({
-    title: title,
-    description: description,
+    title: body.title,
+    description: body.description,
   });
+
   res.status(201).json({
     message: "Note create successfully",
   });
 });
 
-//Get Api /notes
 app.get("/notes", async (req, res) => {
   const notes = await noteModel.find();
   res.status(200).json({
-    message: "Note fetch successfully",
+    message: "Notes fetch successfully",
     notes,
   });
 
-  // when we use find method then it give us an array of objects if the objects exists in array. if the objects don't exist in array then they give empty array.
-  // if we use findOne method then it give us a objects. if we call the object, of which doesn't exist in database then findOne give us "null".
+  // jab hum find ka use karte hai to ye hume objects ka ek array deta hai. aur agar hum find ka use karke dataBase mai se ek particular objects ko chahte hai to ye us object ko array me data hai aur agar wo object nahi hai to empty array [] deta hai.
+  //jab hum findOne ka use karte hai database mai se kisi ek specific data ki lene ke liye to ye hume us data ko ek object me data hai aur agar koi esa data hai jo dataBase mai exist nahi krata to findOne hume "null" deta hai.
+  //note: - find ka findOne ka hab hum use karte hai ek unique object ki find karne ke liye to hume {} ocject ek andar kuch unique cheez deni hoti hai jisse ye methods usko find kar sake.
 });
 
-//Delete Api /notes/:id
 app.delete("/notes/:id", async (req, res) => {
   const id = req.params.id;
-  await noteModel.findByIdAndDelete({ _id: id });
+  await noteModel.findOneAndDelete({ _id: id });
   res.status(200).json({
-    message: "Delete note successfully",
+    message: "Note delete successfully",
   });
 });
 
-//Patch Api /notes/:id
 app.patch("/notes/:id", async (req, res) => {
   const id = req.params.id;
   const body = req.body;

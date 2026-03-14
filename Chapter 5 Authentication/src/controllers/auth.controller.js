@@ -25,8 +25,7 @@ async function register(req, res) {
   res.cookie("token", token);
 
   res.status(201).json({
-    message: "User register successfully",
-    user,
+    message: "You have registered successfully",
   });
 }
 

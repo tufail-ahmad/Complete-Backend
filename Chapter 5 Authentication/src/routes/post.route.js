@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const userModel = require("../models/user.model");
 
 router.post("/create", async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({
+    res.status(401).json({
       message: "Unauthorized",
     });
   }
@@ -23,7 +23,7 @@ router.post("/create", async (req, res) => {
   }
 
   res.status(201).json({
-    message: "Post created successfully",
+    message: "Post create successfully",
   });
 });
 

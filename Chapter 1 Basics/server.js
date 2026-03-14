@@ -1,4 +1,4 @@
-// This file is for starting server. It's a industry pattern
+// This file is for starting server.
 const app = require("./src/app");
 
 app.listen(3000, () => {

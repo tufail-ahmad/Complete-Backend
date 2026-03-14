@@ -5,7 +5,7 @@ app.use(express.json());
 
 const notes = [];
 
-// Post Api /notes
+//Post Api /notes
 app.post("/notes", (req, res) => {
   notes.push(req.body);
   res.status(201).json({
@@ -13,7 +13,7 @@ app.post("/notes", (req, res) => {
   });
 });
 
-// Get Api /notes
+//Get Api /notes
 app.get("/notes", (req, res) => {
   res.status(200).json({
     message: "Notes fetch successfully",
@@ -21,7 +21,7 @@ app.get("/notes", (req, res) => {
   });
 });
 
-// Delete Api /notes/:index
+//Delete Api /notes/:index
 app.delete("/notes/:index", (req, res) => {
   const index = req.params.index;
   delete notes[index];
@@ -30,12 +30,12 @@ app.delete("/notes/:index", (req, res) => {
   });
 });
 
-// Patch Api /notes/:index
+//Patch Api /notes/:index
 app.patch("/notes/:index", (req, res) => {
   const index = req.params.index;
-  const { title, description } = req.body;
-  notes[index].title = title;
-  notes[index].description = description;
+  const body = req.body;
+  notes[index].title = body.title;
+  notes[index].description = body.description;
   res.status(200).json({
     message: "Note update successfully",
   });

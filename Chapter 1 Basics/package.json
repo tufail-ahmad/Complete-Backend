@@ -1,5 +1,5 @@
 {
-  "name": "chapter-4-cloud-storage",
+  "name": "chapter-1-basics",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,10 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@imagekit/nodejs": "^7.3.0",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "mongoose": "^9.3.0",
-    "multer": "^2.1.1"
+    "express": "^5.2.1"
   }
 }

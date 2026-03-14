@@ -1,29 +1,29 @@
 const express = require("express");
 const multer = require("multer");
-const { uploadImage } = require("./services/storage.service");
+const uploadImage = require("./services/storage.service");
 const postModel = require("./models/post.model");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Post Api /create-post
 app.post("/create-post", upload.single("image"), async (req, res) => {
-  const { caption } = req.body;
-  const { buffer } = req.file;
-  const result = await uploadImage(buffer.toString("base64"));
-  const post = await postModel.create({
+  const body = req.body;
+  const file = req.file;
+  const result = await uploadImage(file);
+  await postModel.create({
     image: result.url,
-    caption: caption,
+    caption: body.caption,
   });
+
   res.status(201).json({
     message: "Post create successfully",
-    post,
   });
 });
 
-//Get Api /posts
 app.get("/posts", async (req, res) => {
   const posts = await postModel.find();
   res.status(200).json({
